@@ -10,6 +10,4 @@ void FileReader::init()
     d_moviesPath = d_path + "Movies/";
 
     d_path += "Unsorted/";
-
-    cout << "Log file is at: " << d_logFile << "\n";
 }

@@ -2,6 +2,9 @@
 
 void FileReader::run()
 {
+    if (filesystem::is_empty(d_path))
+        return;
+
     logToFile("\n\n" +
               string("#####################################################\n") +
                       "######## Starting run at " + getTime() + " ########\n"   +
