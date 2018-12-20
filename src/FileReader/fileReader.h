@@ -35,6 +35,9 @@ class FileReader
         // The format is sxxexx, so convert 4 to 04 (i.e. s04e12).
         std::string toDoubleFormat(size_t count);
 
+        // Get current time.
+        std::string getTime() const;
+
         // Move a file.
         void moveFile(std::filesystem::path const &from, std::filesystem::path const &to);
 

@@ -2,6 +2,7 @@
 
 void FileReader::init()
 {
+    // Yeah, I hard coded it. If I can be bothered, I might change that if I can be bothered some day. Who knows.
     d_path = getCurrentPath() + "/";
 
     d_logFile = d_path + "log.txt";
