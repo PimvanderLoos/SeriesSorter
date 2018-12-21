@@ -8,8 +8,10 @@ void FileReader::init()
     d_logFile = d_path + "log.txt";
     d_seriesPath = d_path + "Series/";
     d_moviesPath = d_path + "Movies/";
+    d_trashPath = d_path + "tmp/";
 
     d_path += "Unsorted/";
+
 
     saved_stdout = dup(1);
 }

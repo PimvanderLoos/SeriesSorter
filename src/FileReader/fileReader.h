@@ -12,6 +12,7 @@ class FileReader
         std::string d_path;
         std::string d_seriesPath;
         std::string d_moviesPath;
+        std::string d_trashPath; // Trashpath is location where "deleted" files will be moved to.
         std::filesystem::path d_logFile;
 
         int saved_stdout;
