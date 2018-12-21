@@ -10,4 +10,6 @@ void FileReader::init()
     d_moviesPath = d_path + "Movies/";
 
     d_path += "Unsorted/";
+
+    saved_stdout = dup(1);
 }

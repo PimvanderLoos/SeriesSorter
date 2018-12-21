@@ -9,6 +9,7 @@ void FileReader::parseFile(filesystem::path const &path)
 
     size_t season = 0;
     size_t episode = 0;
+    size_t year = 0;
     string nameAndEpisode;
     string name;
 
@@ -18,11 +19,9 @@ void FileReader::parseFile(filesystem::path const &path)
      * Scorpion.S04E22.1080p.HDTV.X264-DIMENSION[rarbg]/scorpion.422.1080-dimension.mkv
      * So, to make sure the latter gets sorted properly as well, also look for the season/episode in the parent path.
      */
+    // TV SERIES
     if (getNameAndSeasonAndEpisodeFromStr(file, &nameAndEpisode) || getNameAndSeasonAndEpisodeFromStr(parentDir, &nameAndEpisode))
     {
-        name = nameAndEpisode;
-        seriesNameFromStr(&name);
-
         if (!getSeasonAndEpisodeFromStr(nameAndEpisode, &season, &episode))
         {
             logToFile("SOMEHOW FAILED TO FIND SEASON AND EPISODE FROM FILE:" + nameAndEpisode + " in path: " +
@@ -30,13 +29,19 @@ void FileReader::parseFile(filesystem::path const &path)
             return;
         }
 
+        name = nameAndEpisode;
+        seriesNameFromStr(&name, season, episode);
+
         finalPath = d_seriesPath + name + "/" + "Season " + toDoubleFormat(season) + "/"
-                    + getProperName(name) + " - S" + toDoubleFormat(season) + "E" + toDoubleFormat(episode) + extension;
+                    + name + " - S" + toDoubleFormat(season) + "E" + toDoubleFormat(episode) + extension;
     }
-        // Couldn't determine a series.
+    // MOVIE
+    else if (getNameAndYearFromStr(file, &name, &year) || getNameAndYearFromStr(parentDir, &name, &year))
+        finalPath = d_moviesPath + name + " (" + to_string(year) + ")/" + name + " (" + to_string(year) + ")" + extension;
     else
     {
-        finalPath = d_moviesPath + file;
+        logToFile("Failed to parse file: " + path.string());
+        return;
     }
 
     moveFile(path, finalPath);

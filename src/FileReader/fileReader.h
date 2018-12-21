@@ -14,6 +14,8 @@ class FileReader
         std::string d_moviesPath;
         std::filesystem::path d_logFile;
 
+        int saved_stdout;
+
         // Setup this object.
         void init();
 
@@ -38,6 +40,9 @@ class FileReader
         // Get current time.
         std::string getTime() const;
 
+        // Erase all occurrences of substring from string.
+        void eraseSubStr(std::string &mainStr, std::string const &toErase);
+
         // Move a file.
         void moveFile(std::filesystem::path const &from, std::filesystem::path const &to);
 
@@ -54,14 +59,17 @@ class FileReader
         // ("Mr.Robot.s01e04.uploadedbysomeone.more.spam.here.rarbg.mkv") -> ("Mr.Robot.s01e04")
         bool getNameAndSeasonAndEpisodeFromStr(std::string const &str, std::string *result);
 
+        // Get Name + year from string (for movies).
+        bool getNameAndYearFromStr(std::string const &str, std::string *name, size_t *year);
+
         // Extract the name of a series from a specified string. To be used after getNameAndSeasonAndEpisodeFromStr.
-        void seriesNameFromStr(std::string *str);
+        void seriesNameFromStr(std::string *str, size_t season, size_t episode);
 
         // Extract season and episode from a provided string. To be used after getNameAndSeasonAndEpisodeFromStr.
         bool getSeasonAndEpisodeFromStr(std::string const &str, size_t *season, size_t *episode);
 
         // Capitalize first letters of every sentence. ("house of cards" -> "House Of Cards").
-        std::string getProperName(std::string &str);
+        std::string getProperName(std::string *str);
 
     public:
         FileReader();
