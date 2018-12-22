@@ -7,9 +7,7 @@ void FileReader::deleteOldDir(std::filesystem::path const &old)
         return;
     if (directory.string() + "/" == d_path)
         return;
-//    filesystem::remove_all(directory);
-
-    moveFile(old, d_trashPath);
+    filesystem::remove_all(directory);
 
     logToFile("Deleting directory: " + directory.string() + "\n");
 }

@@ -16,6 +16,8 @@ void FileReader::run()
             processFolder(p.path());
         else
             processFile(p.path());
+
+        moveOldDirToTrash(p);
     }
 
     logToFile("\n" +

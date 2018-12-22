@@ -53,6 +53,9 @@ class FileReader
         // Delete specified directory.
         void deleteOldDir(std::filesystem::path const &old);
 
+        // Delete specified directory.
+        void moveOldDirToTrash(std::filesystem::path const &old);
+
         // Log a string to file.
         void logToFile(std::string const &&str);
 

@@ -10,5 +10,4 @@ void FileReader::processFolder(filesystem::path const &path)
         else
             processFile(p);
     }
-    deleteOldDir(path);
 }

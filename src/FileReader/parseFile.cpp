@@ -1,5 +1,8 @@
 #include "fileReader.ih"
 
+// TODO: Check full path for name/season/year/etc extraction, not only filename and parent directory name.
+//       The problem arises with "/Movie/subs/eng.srt", for example.
+// TODO: Ignore sample folders.
 void FileReader::parseFile(filesystem::path const &path)
 {
     filesystem::path finalPath;
@@ -45,5 +48,4 @@ void FileReader::parseFile(filesystem::path const &path)
     }
 
     moveFile(path, finalPath);
-    deleteOldDir(path);
 }
