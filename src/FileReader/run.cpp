@@ -13,11 +13,16 @@ void FileReader::run()
     for (auto &p : filesystem::directory_iterator(d_path))
     {
         if (p.is_directory())
+        {
             processFolder(p.path());
+            moveOldDirToTrash(p.path());
+        }
         else
+        {
             processFile(p.path());
-
-        moveOldDirToTrash(p);
+            if (filesystem::exists(p.path()))
+                moveOldDirToTrash(p.path());
+        }
     }
 
     logToFile("\n" +

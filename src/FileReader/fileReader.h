@@ -53,8 +53,14 @@ class FileReader
         // Delete specified directory.
         void deleteOldDir(std::filesystem::path const &old);
 
-        // Delete specified directory.
+        // Move specified directory to "trash".
         void moveOldDirToTrash(std::filesystem::path const &old);
+
+        // Move specified file to "trash".
+        void moveOldFileToTrash(std::filesystem::path const &old);
+
+        // Get parent dir of path. If path is a directory, it'll return the directory.
+        std::filesystem::path getParentDir(std::filesystem::path const &path);
 
         // Log a string to file.
         void logToFile(std::string const &&str);

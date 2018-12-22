@@ -29,7 +29,7 @@ set(SOURCE_FILES
         src/FileReader/parseFile.cpp src/FileReader/moveFile.cpp src/FileReader/deleteOldDir.cpp
         src/FileReader/safeToDelete.cpp src/FileReader/logToFile.cpp src/FileReader/init.cpp
         src/FileReader/getCurrentPath.cpp src/FileReader/ignoreExtension.cpp src/FileReader/getTime.cpp
-        src/FileReader/getNameAndYearFromStr.cpp src/FileReader/eraseSubStr.cpp src/FileReader/moveOldDirToTrash.cpp)
+        src/FileReader/getNameAndYearFromStr.cpp src/FileReader/eraseSubStr.cpp src/FileReader/moveOldDirToTrash.cpp src/FileReader/moveOldFileToTrash.cpp src/FileReader/getParentDir.cpp)
 
 add_executable(SeriesSorter ${HEADER_FILES} ${INTERNAL_HEADER_FILES} ${SOURCE_FILES})
 

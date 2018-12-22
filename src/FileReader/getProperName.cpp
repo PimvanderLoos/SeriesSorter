@@ -8,7 +8,7 @@ string FileReader::getProperName(string *str)
     properName[0] = toupper(properName[0]);
     for (size_t idx = 1; idx < str->length(); ++idx)
     {
-        if (properName[idx - 1] == ' ')
+        if (properName[idx - 1] == ' ' || properName[idx - 1] == '[')
             properName[idx] = toupper(properName[idx]);
         else
             properName[idx] = tolower(properName[idx]);

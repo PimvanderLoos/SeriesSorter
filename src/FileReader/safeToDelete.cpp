@@ -2,16 +2,15 @@
 
 bool FileReader::safeToDelete(std::filesystem::path const &old)
 {
-    filesystem::path directory = old.parent_path();
-    if (directory.string() + "/" == d_path)
+    filesystem::path parentDir = getParentDir(old);
+
+    if (parentDir.string() + "/" == d_path)
         return false;
 
-    for (auto &p : filesystem::directory_iterator(directory))
+    for (auto &p : filesystem::directory_iterator(parentDir))
     {
-        // If the directory contains another folder (subs?) or if it's a filetype that needs to be processed
-        // DON'T DELETE IT.
-        if (p.is_directory())
-            return false;
+        if (p.is_directory() && !p.path().empty())
+            return safeToDelete(p.path());
         else if (!ignoreExtension(p.path().extension()))
             return false;
     }
