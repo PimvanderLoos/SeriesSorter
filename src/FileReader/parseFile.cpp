@@ -1,13 +1,16 @@
 #include "fileReader.ih"
 
-// TODO: Check full path for name/season/year/etc extraction, not only filename and parent directory name.
-//       The problem arises with "/Movie/subs/eng.srt", for example.
-// TODO: Ignore sample folders.
 void FileReader::parseFile(filesystem::path const &path)
 {
     filesystem::path finalPath;
     string file = path.filename().string();
     string extension = path.filename().extension().string();
+    std::transform(extension.begin(), extension.end(), extension.begin(), ::tolower);
+    if (hasIgnoredExtension(path))
+    {
+        moveOldFileToTrash(path);
+        return;
+    }
     string parentDir = path.parent_path().filename().string();
 
     size_t season = 0;
@@ -47,5 +50,8 @@ void FileReader::parseFile(filesystem::path const &path)
         return;
     }
 
-    moveFile(path, finalPath);
+    size_t dup = moveFile(path, finalPath);
+
+    if (hasVideoExtension(finalPath))
+        writeInfoFile(path, finalPath, dup);
 }

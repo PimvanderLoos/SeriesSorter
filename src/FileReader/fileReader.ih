@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <chrono>
 #include <ctime>
+#include <fstream>
 
 // defines FILENAME_MAX
 #include <stdio.h>

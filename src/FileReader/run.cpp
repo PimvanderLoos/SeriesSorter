@@ -15,13 +15,13 @@ void FileReader::run()
         if (p.is_directory())
         {
             processFolder(p.path());
-            moveOldDirToTrash(p.path());
+//            moveOldDirToTrash(p.path());
         }
         else
         {
-            processFile(p.path());
-            if (filesystem::exists(p.path()))
-                moveOldDirToTrash(p.path());
+            parseFile(p.path());
+//            if (filesystem::exists(p.path()))
+//                moveOldDirToTrash(p.path());
         }
     }
 

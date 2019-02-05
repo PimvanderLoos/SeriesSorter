@@ -4,6 +4,7 @@
 #include "iosfwd"
 #include "string"
 #include <filesystem>
+#include <unordered_set>
 
 class FileReader
 {
@@ -12,8 +13,10 @@ class FileReader
         std::string d_path;
         std::string d_seriesPath;
         std::string d_moviesPath;
-        std::string d_trashPath; // Trashpath is location where "deleted" files will be moved to.
+        std::string d_trashPath;
         std::filesystem::path d_logFile;
+        std::unordered_set<std::string> d_videoFormats;
+        std::unordered_set<std::string> d_ignoredFormats;
 
         int saved_stdout;
 
@@ -23,14 +26,8 @@ class FileReader
         // Get path the app was launched in.
         std::string getCurrentPath() const;
 
-        // Process a specific file.
-        void processFile(std::filesystem::path const &path);
-
         // Process all files in a specific folder.
         void processFolder(std::filesystem::path const &path);
-
-        // Check if the extension should be processed or not (I don't care about .txt files).
-        bool ignoreExtension(std::string &&extension);
 
         // Generate a new path from a file and move the file to the appropriate location afterwards.
         void parseFile(std::filesystem::path const &path);
@@ -45,13 +42,13 @@ class FileReader
         void eraseSubStr(std::string &mainStr, std::string const &toErase);
 
         // Move a file.
-        void moveFile(std::filesystem::path const &from, std::filesystem::path const &to);
+        size_t moveFile(std::filesystem::path const &from, std::filesystem::path const &to, size_t dup = 0);
+
+        // Move a file.
+        void writeInfoFile(std::filesystem::path const &from, std::filesystem::path const &to, size_t dup);
 
         // Check if it's safe to delete a directory.
         bool safeToDelete(std::filesystem::path const &old);
-
-        // Delete specified directory.
-        void deleteOldDir(std::filesystem::path const &old);
 
         // Move specified directory to "trash".
         void moveOldDirToTrash(std::filesystem::path const &old);
@@ -64,6 +61,9 @@ class FileReader
 
         // Log a string to file.
         void logToFile(std::string const &&str);
+
+        // Running this will allow printing to console again.
+        void restoreStdOut();
 
         // Get Name + Season + Episode from a string.
         // ("Mr.Robot.s01e04.uploadedbysomeone.more.spam.here.rarbg.mkv") -> ("Mr.Robot.s01e04")
@@ -80,6 +80,9 @@ class FileReader
 
         // Capitalize first letters of every sentence. ("house of cards" -> "House Of Cards").
         std::string getProperName(std::string *str);
+
+        bool hasVideoExtension  (std::filesystem::path const &path);
+        bool hasIgnoredExtension(std::filesystem::path const &path);
 
     public:
         FileReader();

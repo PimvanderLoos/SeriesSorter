@@ -8,6 +8,6 @@ void FileReader::processFolder(filesystem::path const &path)
         if (p.is_directory())
             processFolder(p.path());
         else
-            processFile(p);
+            parseFile(p);
     }
 }

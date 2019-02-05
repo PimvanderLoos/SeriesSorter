@@ -3,6 +3,7 @@
 string FileReader::getProperName(string *str)
 {
     replace(str->begin(), str->end(), '.',  ' ');
+    replace(str->begin(), str->end(), '-',  ' ');
 
     char *properName = str->data();
     properName[0] = toupper(properName[0]);
@@ -16,7 +17,6 @@ string FileReader::getProperName(string *str)
     string properString = properName;
 
     // Remove any characters that shouldn't be there and remove all trailing whitespace.
-    eraseSubStr(properString, "-");
     eraseSubStr(properString, ")");
     eraseSubStr(properString, "(");
     properString.erase(properString.find_last_not_of(" \t\n\r\f\v") + 1);

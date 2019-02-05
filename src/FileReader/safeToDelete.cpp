@@ -11,7 +11,7 @@ bool FileReader::safeToDelete(std::filesystem::path const &old)
     {
         if (p.is_directory() && !p.path().empty())
             return safeToDelete(p.path());
-        else if (!ignoreExtension(p.path().extension()))
+        else if (hasIgnoredExtension(p.path()))
             return false;
     }
     return true;
