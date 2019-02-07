@@ -4,7 +4,7 @@ bool FileReader::safeToDelete(std::filesystem::path const &old)
 {
     filesystem::path parentDir = getParentDir(old);
 
-    if (parentDir.string() + "/" == d_path)
+    if (parentDir.string() + "/" == d_unsortedPath)
         return false;
 
     for (auto &p : filesystem::directory_iterator(parentDir))

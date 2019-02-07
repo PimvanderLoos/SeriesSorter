@@ -2,7 +2,7 @@
 
 void FileReader::moveOldDirToTrash(std::filesystem::path const &old)
 {
-    if (old.string() == d_path)
+    if (old.string() == d_unsortedPath)
         return;
 
     if (!safeToDelete(old))

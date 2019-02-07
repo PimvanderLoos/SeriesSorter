@@ -5,18 +5,28 @@
 #include "string"
 #include <filesystem>
 #include <unordered_set>
+#include <map>
 
 class FileReader
 {
     private:
         // Store root path and location of series and movies folders as well as the location of the logfile.
         std::string d_path;
+        std::string d_unsortedPath;
         std::string d_seriesPath;
         std::string d_moviesPath;
         std::string d_trashPath;
+        std::string d_configPath;
         std::filesystem::path d_logFile;
         std::unordered_set<std::string> d_videoFormats;
         std::unordered_set<std::string> d_ignoredFormats;
+        std::map<std::string, std::string> d_configOptions;
+
+        void readConfig();
+        void writeConfig();
+
+        // Get a path from a config option.
+        std::string pathFromConfigOption(std::string const &option);
 
         int saved_stdout;
 

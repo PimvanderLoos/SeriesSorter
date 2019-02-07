@@ -28,7 +28,7 @@ set(SOURCE_FILES
         src/FileReader/getNameAndYearFromStr.cpp src/FileReader/eraseSubStr.cpp src/FileReader/moveOldDirToTrash.cpp
         src/FileReader/moveOldFileToTrash.cpp src/FileReader/getParentDir.cpp src/FileReader/writeInfoFile.cpp
         src/FileReader/restoreStdOut.cpp src/FileReader/hasVideoExtension.cpp src/FileReader/hasIgnoredExtension.cpp
-        )
+        src/FileReader/readConfig.cpp src/FileReader/writeConfig.cpp src/FileReader/pathFromConfigOption.cpp)
 
 add_executable(SeriesSorter ${HEADER_FILES} ${INTERNAL_HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(SeriesSorter stdc++fs)

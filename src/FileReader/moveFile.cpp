@@ -4,7 +4,12 @@ size_t FileReader::moveFile(filesystem::path const &from, filesystem::path const
 {
     filesystem::path finalDestination = to;
     if (dup != 0)
-        finalDestination.replace_filename(to.stem().string() + "_" + to_string(dup) + to.extension().string());
+    {
+        if (filesystem::is_directory(finalDestination))
+            finalDestination.replace_filename(to.filename().string() + "_" + to_string(dup));
+        else
+            finalDestination.replace_filename(to.stem().string() + "_" + to_string(dup) + to.extension().string());
+    }
 
     if (filesystem::exists(finalDestination))
         return moveFile(from, to, dup + 1);
