@@ -6,6 +6,12 @@
 #include <filesystem>
 #include <unordered_set>
 #include <map>
+#include <string>
+
+enum class ConfigOptions
+{
+        sleepTime
+};
 
 class FileReader
 {
@@ -17,6 +23,8 @@ class FileReader
         std::string d_moviesPath;
         std::string d_trashPath;
         std::string d_configPath;
+        std::string d_configVersion;
+        size_t d_sleepTime;
         std::filesystem::path d_logFile;
         std::unordered_set<std::string> d_videoFormats;
         std::unordered_set<std::string> d_ignoredFormats;
@@ -27,8 +35,6 @@ class FileReader
 
         // Get a path from a config option.
         std::string pathFromConfigOption(std::string const &option);
-
-        int saved_stdout;
 
         // Setup this object.
         void init();
@@ -72,9 +78,6 @@ class FileReader
         // Log a string to file.
         void logToFile(std::string const &&str);
 
-        // Running this will allow printing to console again.
-        void restoreStdOut();
-
         // Get Name + Season + Episode from a string.
         // ("Mr.Robot.s01e04.uploadedbysomeone.more.spam.here.rarbg.mkv") -> ("Mr.Robot.s01e04")
         bool getNameAndSeasonAndEpisodeFromStr(std::string const &str, std::string *result);
@@ -97,7 +100,13 @@ class FileReader
     public:
         FileReader();
         void run();
+        size_t getSleepTime();
 };
 
+
+inline size_t FileReader::getSleepTime()
+{
+    return d_sleepTime;
+}
 
 #endif

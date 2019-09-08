@@ -2,7 +2,9 @@
 
 void FileReader::logToFile(std::string const &&str)
 {
-    // To print something to terminal, first run this command: dup2(saved_stdout, 1);
-    freopen(d_logFile.c_str(), "a", stdout);
-    cout << str << endl;
+    // TODO: Use function pointers or something to allow for debugging to console instead of file.
+    ofstream logFile;
+    logFile.open(d_logFile);
+    logFile << str << endl;
+    logFile.close();
 }

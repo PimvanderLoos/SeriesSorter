@@ -1,0 +1,11 @@
+[Unit]
+Description=Series Sorter daemon
+
+[Service]
+Type=simple
+ExecStart=/mnt/WDRed6/SeriesAndMovies/SeriesSorter
+User=pim
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

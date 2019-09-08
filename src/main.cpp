@@ -9,13 +9,12 @@
 
 int main()
 {
+    size_t sleepTime = 300;
+    FileReader fr;
     while(true)
     {
-        {
-            FileReader fr;
-            fr.run();
-        }
+        fr.run();
         // Run every 5 minutes
-        sleep(300);
+        sleep(sleepTime);
     }
 }
