@@ -24,7 +24,6 @@ class FileReader
         std::string d_trashPath;
         std::string d_configPath;
         std::string d_configVersion;
-        size_t d_sleepTime;
         std::filesystem::path d_logFile;
         std::unordered_set<std::string> d_videoFormats;
         std::unordered_set<std::string> d_ignoredFormats;
@@ -100,13 +99,6 @@ class FileReader
     public:
         FileReader();
         void run();
-        size_t getSleepTime();
 };
-
-
-inline size_t FileReader::getSleepTime()
-{
-    return d_sleepTime;
-}
 
 #endif
